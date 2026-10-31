@@ -1,0 +1,6 @@
+%%R
+data("iris")
+iris <- subset(iris, Species %in% c("setosa", "versicolor"))
+m <- glm(Species ~ Petal.Length + Petal.Width, data=iris, family=binomial)
+p <- ifelse(predict(m, type="response") > 0.5, "versicolor", "setosa")
+table(p, iris$Species)
